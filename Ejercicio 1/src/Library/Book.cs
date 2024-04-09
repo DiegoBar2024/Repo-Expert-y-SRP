@@ -4,7 +4,6 @@ namespace Ucu.Poo.Expert
 {
     public class Book
     {
-
         public string Title { get ; }
         public string Author { get ; }
         public string Code { get ;  }
@@ -30,5 +29,5 @@ namespace Ucu.Poo.Expert
 Ésta clase viola el principio SRP debido que tiene dos responsabilidades:
 i) Conocer las características de un libro (autor, código, título, ubicación)
 ii) Colocar el libro en un estante (método ShelveBook)
-De éste modo, sería conveniente las responsabilidades creando otra clase la cual implemente el método "ShelveBook"
+De éste modo, sería conveniente las responsabilidades creando otra clase la cual implemente el método "ShelveBook".
 */
