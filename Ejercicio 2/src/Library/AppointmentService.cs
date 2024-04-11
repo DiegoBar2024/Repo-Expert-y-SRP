@@ -34,7 +34,6 @@ namespace Library
                 isValid = false;
             }
 
-
             if (string.IsNullOrEmpty(doctorName))
             {
                 stringBuilder.Append("Unable to schedule appointment, 'doctor name' is required\n");
@@ -48,6 +47,16 @@ namespace Library
 
             return stringBuilder.ToString();
         }
-
     }
 }
+
+/*
+La clase AppointmentService viola el principio SRP debido que tiene las siguientes responsabilidades:
+i) Controlar que el nombre ingresado no sea nulo ni vacio
+ii) Controlar que la id ingresada no sea nula ni vacía
+iii) Controlar que el teléfono ingresado no sea nulo ni vacío
+iv) Controlar que el lugar de la cita no sea nulo ni vacío
+v) Controlar que el nombre del doctor no sea nulo ni vacío
+vi) Armar la cadena de la cita
+Debería de poder separar las responsabilidades en diferentes clases
+*/
