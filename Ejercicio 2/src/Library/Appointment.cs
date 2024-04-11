@@ -27,28 +27,21 @@ namespace Library
             bool isValid = true;
 
             // Compruebo si la persona Paciente es valida
-            if (!Patient.isPersonValid())
+            if (!this.Patient.isPersonValid())
             {
                 Console.WriteLine("Compruebe que los datos del paciente sean correctos");
                 isValid = false;
             }
 
             // Compruebo si la persona Doctor es valida
-            if (!Doctor.isPersonValid())
+            if (!this.Doctor.isPersonValid())
             {
                 Console.WriteLine("Compruebe que los datos del doctor sean correctos");
                 isValid = false;
             }
 
             // Compruebo que el lugar de la cita sea válido
-            if (string.IsNullOrEmpty(appoinmentPlace))
-            {
-                Console.WriteLine("Se requiere que ingrese un lugar para que la cita sea válida");
-                isValid = false;
-            }
-
-            // Compruebo que la fecha de la cita sea válida
-            if (string.IsNullOrEmpty(appoinmentPlace))
+            if (string.IsNullOrEmpty(this.Place))
             {
                 Console.WriteLine("Se requiere que ingrese un lugar para que la cita sea válida");
                 isValid = false;
