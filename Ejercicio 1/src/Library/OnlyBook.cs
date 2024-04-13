@@ -2,6 +2,7 @@ using System;
 
 namespace Ucu.Poo.Expert
 {
+    // Ésta clase se encarga únicamente de conocer el libro y su ubicación
     public class OnlyBook
     {
         public string Title { get ; }
@@ -20,7 +21,7 @@ namespace Ucu.Poo.Expert
 }
 
 /*
-Ésta clase viola el principio SRP debido que tiene dos responsabilidades:
+La clase "Book" inicial viola el principio SRP debido que tiene dos responsabilidades:
 i) Conocer las características de un libro (autor, código, título, ubicación)
 ii) Colocar el libro en un estante (método ShelveBook)
 De éste modo, sería conveniente las responsabilidades creando otra clase la cual implemente el método "ShelveBook".

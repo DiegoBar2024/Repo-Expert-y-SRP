@@ -6,6 +6,7 @@ namespace Ucu.Poo.Expert
     {
         static void Main()
         {
+            // Creo dos insta
             OnlyBook libro1 = new OnlyBook("Design Patterns","Erich Gamma & Others","001-034");
             OnlyBook libro2 = new OnlyBook("Pro C#","Troelsen","001-035");
             OnlyShelveBook.ShelveBook("A","7",libro1);
