@@ -11,6 +11,7 @@ namespace Library
             this.Name = name;
             this.Id = id;
             this.phoneNumber = number;
+            this.isValid = true;
         }
 
         // Atributos de la clase
@@ -18,34 +19,46 @@ namespace Library
         public string Id { get; set; }
         public string phoneNumber { get; set; }
 
-        // Creo un método que me diga si la persona creada es válida o no
-        public bool isPersonValid()
+        // Atributo isValid que me diga si la persona es válida o no
+        public bool isValid { get; set; }
+
+        public string ValidatePerson()
         {
             // Inicializo variable local
-            bool isValid = true;
+            StringBuilder stringBuilder = new StringBuilder();
 
-            // Compruebo si el campo nombre es no vacío o distinto de espacios en blanco
+            // Comprobación de nombre
             if (string.IsNullOrEmpty(this.Name))
             {
-                Console.WriteLine("Se requiere que ingrese un nombre para que la persona sea válida");
-                isValid = false;
+                stringBuilder.Append("Unable to schedule appointment, 'name' is required\n");
+                this.isValid = false;
             }
-            
-            // Compruebo si el campo id es no vacío o distinto de espacios en blanco
+
+            // Comprobación de Id
             if (string.IsNullOrEmpty(this.Id))
             {
-                Console.WriteLine("Se requiere que ingrese una id para que la persona sea válida");
-                isValid = false;
+                stringBuilder.Append("Unable to schedule appointment, 'id' is required\n");
+                this.isValid = false;
             }
 
+            // Comprobación de numero de telefono
             if (string.IsNullOrEmpty(this.phoneNumber))
             {
-                Console.WriteLine("Se requiere que ingrese un número de teléfono para que la persona sea válida");
-                isValid = false;
+                stringBuilder.Append("Unable to schedule appointment, 'phone number' is required\n");
+                this.isValid = false;
             }
 
-            // Retorno la bandera que me dice si la persona es válida o no
-            return isValid;
+            // Retorno la cadena
+            return stringBuilder.ToString();
         }
     }
 }
+
+/*
+La clase original CreateAppointment incumple con el principio SRP debido que tiene las siguientes responsabilidades:
+i) Generar la cadena del appointment
+ii) Realizar todas las validaciones correspondientes a los datos
+iii) Tener conocimiento de información acerca de personas y del appointment que no precisa para cumplir con la responsabilidad de imprimir
+De éste modo, se opta por crear tres clases: una clase Person que se encarga de conocer personas, otra clase Appointment que se encarga de conocer el appointment y finalmente otra que se encargue de hacer sólo la impresión
+En ésta solapa se implementa la clase Person que se encarga de conocer la persona.
+*/

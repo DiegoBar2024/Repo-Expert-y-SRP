@@ -6,49 +6,58 @@ namespace Library
     public class Appointment
     {
         // Constructor de la clase
-        public Appointment (Person patient, Person doctor, DateTime date, string place)
+        public Appointment (Person patient, string doctor_name, DateTime date, string place)
         {
             this.Patient = patient;
-            this.Doctor = doctor;
+            this.doctorName = doctor_name;
             this.Date = date;
             this.Place = place;
+            this.isValid = true;
         }
 
         // Atributos de la clase
         public Person Patient { get; set; }
-        public Person Doctor { get; set; }
+        public string doctorName { get; set; }
         public DateTime Date { get; set; }
         public string Place { get; set; }
 
-        // Creo un método que me diga si la cita es válida o no
-        public bool isAppointmentValid()
+        // Atributo isValid que me diga si el appointment es valido o no
+        public bool isValid { get; set; }
+
+        // Creo un método que me valide el appointment y me devuelva una cadena
+        public string ValidateAppointment()
         {
             // Inicializo variable local
-            bool isValid = true;
+            StringBuilder stringBuilder = new StringBuilder();
+        
+            // Invoco al método ValidatePerson y concateno las cadenas
+            stringBuilder.Append(Patient.ValidatePerson());
 
-            // Compruebo si la persona Paciente es valida
-            if (!this.Patient.isPersonValid())
+            // En caso de que el paciente no sea válido, que me baje la bandera
+            if (!Patient.isValid)
             {
-                Console.WriteLine("Compruebe que los datos del paciente sean correctos");
-                isValid = false;
+                this.isValid = false;
             }
 
-            // Compruebo si la persona Doctor es valida
-            if (!this.Doctor.isPersonValid())
-            {
-                Console.WriteLine("Compruebe que los datos del doctor sean correctos");
-                isValid = false;
-            }
-
-            // Compruebo que el lugar de la cita sea válido
+            // Comprobación del lugar
             if (string.IsNullOrEmpty(this.Place))
             {
-                Console.WriteLine("Se requiere que ingrese un lugar para que la cita sea válida");
-                isValid = false;
+                stringBuilder.Append("Unable to schedule appointment, 'appointment place' is required\n");
+                this.isValid = false;
             }
 
-            // Retorno la bandera que me dice si la persona es válida o no
-            return isValid;
+            // Comprobación de nombre del doctor
+            if (string.IsNullOrEmpty(this.doctorName))
+            {
+                stringBuilder.Append("Unable to schedule appointment, 'doctor name' is required\n");
+                this.isValid = false;
+            }
+
+            return stringBuilder.ToString();
         }
     }
 }
+
+/* 
+La clase Appointment tiene la responsabilidad de conocer el appointment (cita) y validarlo
+*/

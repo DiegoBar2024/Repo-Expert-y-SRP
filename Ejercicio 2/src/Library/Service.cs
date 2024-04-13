@@ -8,22 +8,21 @@ namespace Library
         public static string GetAppointment(Appointment appointment)
         {
             // Creo la cadena en donde voy a guardar la cadena
-            StringBuilder stringAppointment = new StringBuilder("Agendando cita...\n");
+            StringBuilder stringBuilder = new StringBuilder("Scheduling appointment...\n");
 
-            // En caso de que la cita sea válida (llamo al método de Appointment) que me confirme que está todo bien
-            if (appointment.isAppointmentValid())
-            {
-                stringAppointment.Append("Cita agendada correctamente");
-            }
+            stringBuilder.Append(appointment.ValidateAppointment());
 
-            // En caso de que la cita no sea válida, le digo al usuario que revise los datos ingresados
-            else
+            if (appointment.isValid)
             {
-                stringAppointment.Append("Error al agendar cita. Comprobar datos ingresados");
+                stringBuilder.Append("Apointment scheduled");
             }
 
             // Retorno la cadena correspondiente
-            return stringAppointment.ToString();
+            return stringBuilder.ToString();
         }
     }
 }
+
+/*
+La clase Service tiene la responsabilidad de generar la cadena del appointment a imprimir
+*/
